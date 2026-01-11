@@ -1,5 +1,6 @@
 package com.example.websocket_demo.client;
 
+import com.example.websocket_demo.Message;
 import org.springframework.messaging.converter.JacksonJsonMessageConverter;
 //import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.simp.stomp.StompSession;
@@ -12,11 +13,12 @@ import org.springframework.web.socket.sockjs.client.Transport;
 import org.springframework.web.socket.sockjs.client.WebSocketTransport;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class MyStompClient {
     private StompSession  session;
     private String username;
-    public MyStompClient(String username) {
+    public MyStompClient(String username) throws ExecutionException, InterruptedException {
         this.username = username;
         List<Transport> transports = new ArrayList<>();
         transports.add(new WebSocketTransport(new StandardWebSocketClient()));
@@ -25,5 +27,15 @@ public class MyStompClient {
         stompClient.setMessageConverter(new JacksonJsonMessageConverter());
         StompSessionHandler sessionHandler = new MyStompSessionHandler(username);
         String url = "ws://localhost:8080/ws";
+        session = stompClient.connectAsync(url, sessionHandler).get();
+    }
+
+    public void sendMessage(Message message) {
+        try {
+            session.send("/app/message", message);
+            System.out.println("Message Sent: " + message.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

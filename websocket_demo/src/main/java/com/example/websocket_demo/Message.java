@@ -11,4 +11,6 @@ public class Message {
     }
     public String getUser() {return user;}
     public String getMessage() {return message;}
+    public void setUser(String user) { this.user = user; }
+    public void setMessage(String message) { this.message = message; }
 }

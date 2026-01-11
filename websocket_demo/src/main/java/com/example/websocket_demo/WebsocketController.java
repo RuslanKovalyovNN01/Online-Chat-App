@@ -2,16 +2,19 @@ package com.example.websocket_demo;
 
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.messaging.handler.annotation.MessageMapping;
+
 
 @Controller
 public class WebsocketController {
     private final SimpMessagingTemplate messagingTemplate;
+    // private final WebSocketSessionManager sessionManager;
     @Autowired
     public WebsocketController(SimpMessagingTemplate messgingTemplate){
         this.messagingTemplate = messgingTemplate;
+        //this.sessionManager = sessionManager;
     }
     @MessageMapping("/message")
     public void handleMessage(Message message) {

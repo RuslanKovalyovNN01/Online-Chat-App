@@ -1,7 +1,13 @@
 package com.example.websocket_demo.client;
 
-public class ClientGUI {
-    public static void main(String[] args) {
+import com.example.websocket_demo.Message;
 
+import java.util.concurrent.ExecutionException;
+
+public class ClientGUI {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        MyStompClient myStompClient = new MyStompClient("Ruslan");
+        myStompClient.sendMessage(new Message("Ruslan", "Hello, Ruslan"));
+        new java.util.concurrent.CountDownLatch(1).await();
     }
 }
