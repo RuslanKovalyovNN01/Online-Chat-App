@@ -7,7 +7,8 @@ public class App {
         SwingUtilities.invokeLater(new Runnable(){
             @Override
             public void run() {
-                
+                ClientGUI clientGUI = new ClientGUI("Ruslan");
+                clientGUI.setVisible(true);
             }
         });
     }
