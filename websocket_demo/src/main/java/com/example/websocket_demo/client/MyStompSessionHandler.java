@@ -21,6 +21,7 @@ public class MyStompSessionHandler extends  StompSessionHandlerAdapter {
     public void afterConnected(StompSession session, StompHeaders connectedHeaders){
         System.out.println("Client Connected");
         System.out.println("Before subscribing");
+        session.send("/app/connect", username);
         try {
             session.subscribe("/topic/messages", new StompFrameHandler() {
                 @Override
