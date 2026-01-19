@@ -31,6 +31,7 @@ public class ClientGUI extends JFrame {
             }
         });
         getContentPane().setBackground(Utilities.PRIMARY_COLOR);
+
     }
     private void addGUIComponents() {
         addConnectedUsersComponents();
@@ -42,5 +43,8 @@ public class ClientGUI extends JFrame {
         connectedUsersPanel.setPreferredSize(new Dimension(200, getHeight()));
         JLabel connectedUsersLabel = new JLabel("Connected Users");
         connectedUsersLabel.setFont(new Font("Inter", Font.BOLD, 18));
+        connectedUsersLabel.setForeground(Utilities.TEXT_COLOR);
+        connectedUsersPanel.add(connectedUsersLabel);
+        add(connectedUsersPanel, BorderLayout.WEST);
     }
 }
