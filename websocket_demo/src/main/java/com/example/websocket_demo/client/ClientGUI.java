@@ -1,5 +1,7 @@
 package com.example.websocket_demo.client;
 
+import jdk.jshell.execution.Util;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -56,5 +58,10 @@ public class ClientGUI extends JFrame {
         messagePanel.setLayout(new BoxLayout(messagePanel, BoxLayout.Y_AXIS));
         messagePanel.setBackground(Utilities.TRANSPARENT_COLOR);
         chatPanel.add(messagePanel, BorderLayout.CENTER);
+        JLabel message = new JLabel("Hi everyone");
+        message.setFont(new Font("Inter", Font.BOLD, 18));
+        message.setForeground(Utilities.TEXT_COLOR);
+        messagePanel.add(message);
+        add(chatPanel, BorderLayout.CENTER);
     }
 }
