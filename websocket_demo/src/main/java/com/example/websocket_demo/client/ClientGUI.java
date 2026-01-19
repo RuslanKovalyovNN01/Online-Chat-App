@@ -15,7 +15,7 @@ import java.awt.event.WindowEvent;
 //}
 
 public class ClientGUI extends JFrame {
-    private JPanel connectedUsersPanel;
+    private JPanel connectedUsersPanel, messagePanel;
     public ClientGUI(String username) {
         super("User: " + username);
         setSize(1218,685);
@@ -51,6 +51,10 @@ public class ClientGUI extends JFrame {
     private void addChatComponents() {
         JPanel chatPanel = new JPanel();
         chatPanel.setLayout(new BorderLayout());
-        chatPanel.setBackground(Utilities.TEXT_COLOR);
+        chatPanel.setBackground(Utilities.TRANSPARENT_COLOR);
+        messagePanel = new JPanel();
+        messagePanel.setLayout(new BoxLayout(messagePanel, BoxLayout.Y_AXIS));
+        messagePanel.setBackground(Utilities.TRANSPARENT_COLOR);
+        chatPanel.add(messagePanel, BorderLayout.CENTER);
     }
 }
