@@ -32,6 +32,7 @@ public class ClientGUI extends JFrame {
         });
         getContentPane().setBackground(Utilities.PRIMARY_COLOR);
         addGUIComponents();
+        addChatComponents();
     }
     private void addGUIComponents() {
         addConnectedUsersComponents();
@@ -46,5 +47,10 @@ public class ClientGUI extends JFrame {
         connectedUsersLabel.setForeground(Utilities.TEXT_COLOR);
         connectedUsersPanel.add(connectedUsersLabel);
         add(connectedUsersPanel, BorderLayout.WEST);
+    }
+    private void addChatComponents() {
+        JPanel chatPanel = new JPanel();
+        chatPanel.setLayout(new BorderLayout());
+        chatPanel.setBackground(Utilities.TEXT_COLOR);
     }
 }
