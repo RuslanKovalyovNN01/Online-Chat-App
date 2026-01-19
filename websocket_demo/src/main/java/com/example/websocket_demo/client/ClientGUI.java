@@ -26,11 +26,11 @@ public class ClientGUI extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 int option = JOptionPane.showConfirmDialog(ClientGUI.this, "Do you want to leave?", "Exit", JOptionPane.YES_NO_OPTION);
-
                 if(option == JOptionPane.YES_OPTION) {
                     ClientGUI.this.dispose();
                 }
             }
         });
+        getContentPane().setBackground(Utilities.PRIMARY_COLOR);
     }
 }
