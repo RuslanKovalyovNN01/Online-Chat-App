@@ -31,7 +31,7 @@ public class ClientGUI extends JFrame {
             }
         });
         getContentPane().setBackground(Utilities.PRIMARY_COLOR);
-
+        addGUIComponents();
     }
     private void addGUIComponents() {
         addConnectedUsersComponents();
