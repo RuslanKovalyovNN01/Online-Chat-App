@@ -9,6 +9,7 @@ public class App {
             public void run() {
                 ClientGUI clientGUI = new ClientGUI("Ruslan");
                 clientGUI.setVisible(true);
+                //a
             }
         });
     }
