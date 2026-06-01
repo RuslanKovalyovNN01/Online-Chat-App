@@ -1,4 +1,4 @@
 # Online-Chat-App
 ## About
-This repo contains
+This repo contains java chat application
 ## Run
