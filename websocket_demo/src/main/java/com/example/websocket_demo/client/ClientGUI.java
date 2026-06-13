@@ -1,5 +1,6 @@
 package com.example.websocket_demo.client;
 
+import com.example.websocket_demo.Message;
 import jdk.jshell.execution.Util;
 
 import javax.swing.*;
@@ -78,5 +79,9 @@ public class ClientGUI extends JFrame {
         chatPanel.add(inputPanel, BorderLayout.SOUTH);
 
         add(chatPanel, BorderLayout.CENTER);
+    }
+    private JPanel createChatMessageComponent(Message message){
+        JPanel chatMessage = new JPanel();
+        return chatMessage;
     }
 }
