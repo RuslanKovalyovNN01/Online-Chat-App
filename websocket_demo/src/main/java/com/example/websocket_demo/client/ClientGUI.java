@@ -34,10 +34,10 @@ public class ClientGUI extends JFrame {
         });
         getContentPane().setBackground(Utilities.PRIMARY_COLOR);
         addGUIComponents();
-        addChatComponents();
     }
     private void addGUIComponents() {
         addConnectedUsersComponents();
+        addChatComponents();
     }
     private void addConnectedUsersComponents() {
         connectedUsersPanel = new JPanel();
@@ -62,6 +62,19 @@ public class ClientGUI extends JFrame {
         message.setFont(new Font("Inter", Font.BOLD, 18));
         message.setForeground(Utilities.TEXT_COLOR);
         messagePanel.add(message);
+
+        JPanel inputPanel= new JPanel();
+        inputPanel.setLayout(new BorderLayout());
+        inputPanel.setBackground(Utilities.TRANSPARENT_COLOR);
+
+        JTextField inputField = new JTextField();
+        inputField.setBackground(Utilities.SECONDARY_COLOR);
+        inputField.setForeground(Utilities.TEXT_COLOR);
+        inputField.setFont(new Font("Inter", Font.PLAIN, 16));
+        inputField.setPreferredSize(new Dimension(inputPanel.getWidth(),50));
+        inputPanel.add(inputField, BorderLayout.CENTER);
+        chatPanel.add(inputPanel, BorderLayout.SOUTH);
+
         add(chatPanel, BorderLayout.CENTER);
     }
 }
