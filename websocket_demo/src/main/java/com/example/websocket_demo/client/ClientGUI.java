@@ -82,6 +82,9 @@ public class ClientGUI extends JFrame {
     }
     private JPanel createChatMessageComponent(Message message){
         JPanel chatMessage = new JPanel();
+        chatMessage.setBackground(Utilities.TRANSPARENT_COLOR);
+        chatMessage.setLayout(new BoxLayout(chatMessage, BoxLayout.Y_AXIS));
+        chatMessage.setBorder(Utilities.addPadding(20,20,10,20));
         return chatMessage;
     }
 }
