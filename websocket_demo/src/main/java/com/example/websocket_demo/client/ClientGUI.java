@@ -85,6 +85,12 @@ public class ClientGUI extends JFrame {
         chatMessage.setBackground(Utilities.TRANSPARENT_COLOR);
         chatMessage.setLayout(new BoxLayout(chatMessage, BoxLayout.Y_AXIS));
         chatMessage.setBorder(Utilities.addPadding(20,20,10,20));
+
+        JLabel usernameLabel = new JLabel(message.getUser());
+        usernameLabel.setFont(new Font("Inter", Font.BOLD, 18));
+        usernameLabel.setForeground(Utilities.TEXT_COLOR);
+        chatMessage.add(usernameLabel);
+        
         return chatMessage;
     }
 }
