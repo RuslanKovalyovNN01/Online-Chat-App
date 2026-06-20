@@ -64,10 +64,10 @@ public class ClientGUI extends JFrame {
 
         messagePanel.add(createChatMessageComponent(new Message("Ruslan", "Hello!")));
 
-        JLabel message = new JLabel("Hi everyone");
-        message.setFont(new Font("Inter", Font.BOLD, 18));
-        message.setForeground(Utilities.TEXT_COLOR);
-        messagePanel.add(message);
+        //JLabel message = new JLabel("Hi everyone");
+        //message.setFont(new Font("Inter", Font.BOLD, 18));
+        //message.setForeground(Utilities.TEXT_COLOR);
+        //messagePanel.add(message);
 
         JPanel inputPanel= new JPanel();
         inputPanel.setBorder(Utilities.addPadding(10,10,10,10));
