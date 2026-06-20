@@ -2,6 +2,7 @@ package com.example.websocket_demo.client;
 
 import javax.swing.*;
 
+
 public class App {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable(){
@@ -9,7 +10,6 @@ public class App {
             public void run() {
                 ClientGUI clientGUI = new ClientGUI("Ruslan");
                 clientGUI.setVisible(true);
-                //a
             }
         });
     }
