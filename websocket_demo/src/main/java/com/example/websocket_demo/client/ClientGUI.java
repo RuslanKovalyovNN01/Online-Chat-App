@@ -56,10 +56,14 @@ public class ClientGUI extends JFrame {
         JPanel chatPanel = new JPanel();
         chatPanel.setLayout(new BorderLayout());
         chatPanel.setBackground(Utilities.TRANSPARENT_COLOR);
+
         messagePanel = new JPanel();
         messagePanel.setLayout(new BoxLayout(messagePanel, BoxLayout.Y_AXIS));
         messagePanel.setBackground(Utilities.TRANSPARENT_COLOR);
         chatPanel.add(messagePanel, BorderLayout.CENTER);
+
+        messagePanel.add(createChatMessageComponent(new Message("Ruslan", "Hello!")));
+
         JLabel message = new JLabel("Hi everyone");
         message.setFont(new Font("Inter", Font.BOLD, 18));
         message.setForeground(Utilities.TEXT_COLOR);
