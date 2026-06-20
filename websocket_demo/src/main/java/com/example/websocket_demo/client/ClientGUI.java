@@ -90,7 +90,12 @@ public class ClientGUI extends JFrame {
         usernameLabel.setFont(new Font("Inter", Font.BOLD, 18));
         usernameLabel.setForeground(Utilities.TEXT_COLOR);
         chatMessage.add(usernameLabel);
-        
+
+        JLabel messageLabel = new JLabel(message.getMessage());
+        messageLabel.setFont(new Font("Inter", Font.BOLD, 18));
+        messageLabel.setForeground(Utilities.TEXT_COLOR);
+        chatMessage.add(messageLabel);
+
         return chatMessage;
     }
 }
