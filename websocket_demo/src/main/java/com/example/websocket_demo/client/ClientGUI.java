@@ -5,6 +5,8 @@ import jdk.jshell.execution.Util;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -75,6 +77,12 @@ public class ClientGUI extends JFrame {
         inputPanel.setBackground(Utilities.TRANSPARENT_COLOR);
 
         JTextField inputField = new JTextField();
+        inputField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e){
+
+            }
+        });
         inputField.setBackground(Utilities.SECONDARY_COLOR);
         inputField.setForeground(Utilities.TEXT_COLOR);
         inputField.setFont(new Font("Inter", Font.PLAIN, 16));
