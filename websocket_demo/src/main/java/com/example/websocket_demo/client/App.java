@@ -1,6 +1,7 @@
 package com.example.websocket_demo.client;
 
 import javax.swing.*;
+import java.util.concurrent.ExecutionException;
 
 
 public class App {
@@ -8,7 +9,14 @@ public class App {
         SwingUtilities.invokeLater(new Runnable(){
             @Override
             public void run() {
-                ClientGUI clientGUI = new ClientGUI("Ruslan");
+                ClientGUI clientGUI = null;
+                try {
+                    clientGUI = new ClientGUI("Ruslan");
+                } catch (ExecutionException e) {
+                    throw new RuntimeException(e);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
                 clientGUI.setVisible(true);
             }
         });

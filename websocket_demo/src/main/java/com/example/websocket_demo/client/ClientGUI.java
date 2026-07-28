@@ -9,6 +9,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.concurrent.ExecutionException;
 
 //public class ClientGUI {
 //    public static void main(String[] args) throws ExecutionException, InterruptedException {
@@ -21,8 +22,12 @@ import java.awt.event.WindowEvent;
 
 public class ClientGUI extends JFrame {
     private JPanel connectedUsersPanel, messagePanel;
-    public ClientGUI(String username) {
+    private MyStompClient myStompClient;
+    private String username;
+    public ClientGUI(String username) throws ExecutionException, InterruptedException {
         super("User: " + username);
+        this.username = username;
+        myStompClient = new MyStompClient(username);
         setSize(1218,685);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -31,6 +36,7 @@ public class ClientGUI extends JFrame {
             public void windowClosing(WindowEvent e) {
                 int option = JOptionPane.showConfirmDialog(ClientGUI.this, "Do you want to leave?", "Exit", JOptionPane.YES_NO_OPTION);
                 if(option == JOptionPane.YES_OPTION) {
+                    myStompClient.disconnectUser(username);
                     ClientGUI.this.dispose();
                 }
             }
@@ -66,6 +72,7 @@ public class ClientGUI extends JFrame {
 
         messagePanel.add(createChatMessageComponent(new Message("Ruslan", "Hello!")));
 
+
         //JLabel message = new JLabel("Hi everyone");
         //message.setFont(new Font("Inter", Font.BOLD, 18));
         //message.setForeground(Utilities.TEXT_COLOR);
@@ -80,11 +87,20 @@ public class ClientGUI extends JFrame {
         inputField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e){
-
+                if(e.getKeyChar() == KeyEvent.VK_ENTER){
+                    String input = inputField.getText();
+                    if(input.isEmpty()) return;
+                    inputField.setText("");
+                    messagePanel.add(createChatMessageComponent(new Message("R",input)));
+                    repaint();
+                    revalidate();
+                    myStompClient.sendMessage(new Message(username, input));
+                }
             }
         });
         inputField.setBackground(Utilities.SECONDARY_COLOR);
         inputField.setForeground(Utilities.TEXT_COLOR);
+        inputField.setBorder(Utilities.addPadding(0,10,0,10));
         inputField.setFont(new Font("Inter", Font.PLAIN, 16));
         inputField.setPreferredSize(new Dimension(inputPanel.getWidth(),50));
         inputPanel.add(inputField, BorderLayout.CENTER);

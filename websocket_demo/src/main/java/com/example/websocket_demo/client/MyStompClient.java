@@ -26,7 +26,7 @@ public class MyStompClient {
         WebSocketStompClient stompClient = new WebSocketStompClient(sockJsClient);
         stompClient.setMessageConverter(new JacksonJsonMessageConverter());
         StompSessionHandler sessionHandler = new MyStompSessionHandler(username);
-        String url = "ws://localhost:8080/ws";
+        String url = "ws://localhost:8081/ws";
         session = stompClient.connectAsync(url, sessionHandler).get();
     }
 
