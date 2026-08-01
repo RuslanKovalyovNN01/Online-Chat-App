@@ -6,6 +6,10 @@ import java.util.concurrent.ExecutionException;
 
 public class App {
     public static void main(String[] args) {
+        // a
+        // a
+        // a
+        final int c = 3;
         SwingUtilities.invokeLater(new Runnable(){
             @Override
             public void run() {
