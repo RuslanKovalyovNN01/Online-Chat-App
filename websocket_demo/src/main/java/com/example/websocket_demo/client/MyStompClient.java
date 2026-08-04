@@ -18,14 +18,14 @@ import java.util.concurrent.ExecutionException;
 public class MyStompClient {
     private StompSession  session;
     private String username;
-    public MyStompClient(String username) throws ExecutionException, InterruptedException {
+    public MyStompClient(MessageListener messageListener,String username) throws ExecutionException, InterruptedException {
         this.username = username;
         List<Transport> transports = new ArrayList<>();
         transports.add(new WebSocketTransport(new StandardWebSocketClient()));
         SockJsClient sockJsClient = new SockJsClient(transports);
         WebSocketStompClient stompClient = new WebSocketStompClient(sockJsClient);
         stompClient.setMessageConverter(new JacksonJsonMessageConverter());
-        StompSessionHandler sessionHandler = new MyStompSessionHandler(username);
+        StompSessionHandler sessionHandler = new MyStompSessionHandler(messageListener, username);
         String url = "ws://localhost:8081/ws";
         session = stompClient.connectAsync(url, sessionHandler).get();
     }

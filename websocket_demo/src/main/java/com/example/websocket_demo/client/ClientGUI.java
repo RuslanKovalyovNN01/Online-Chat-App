@@ -28,7 +28,7 @@ public class ClientGUI extends JFrame implements MessageListener{
     public ClientGUI(String username) throws ExecutionException, InterruptedException {
         super("User: " + username);
         this.username = username;
-        myStompClient = new MyStompClient(username);
+        myStompClient = new MyStompClient(this,username);
         setSize(1218,685);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -132,7 +132,7 @@ public class ClientGUI extends JFrame implements MessageListener{
 
     @Override
     public void onMessageReceived(Message message) {
-        
+        System.out.println("onMessageRecieve");
     }
 
     @Override

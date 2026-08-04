@@ -12,8 +12,10 @@ import java.lang.reflect.Type;
 public class MyStompSessionHandler extends  StompSessionHandlerAdapter {
 
     private String username;
+    private MessageListener messageListener;
 
-    public MyStompSessionHandler(String username) {
+    public MyStompSessionHandler(MessageListener messageListener, String username) {
+        this.messageListener = messageListener;
         this.username = username;
     }
 
