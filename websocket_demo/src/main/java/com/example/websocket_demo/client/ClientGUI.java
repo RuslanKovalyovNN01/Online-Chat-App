@@ -9,6 +9,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 //public class ClientGUI {
@@ -20,7 +21,7 @@ import java.util.concurrent.ExecutionException;
 //    }
 //}
 
-public class ClientGUI extends JFrame {
+public class ClientGUI extends JFrame implements MessageListener{
     private JPanel connectedUsersPanel, messagePanel;
     private MyStompClient myStompClient;
     private String username;
@@ -34,12 +35,14 @@ public class ClientGUI extends JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                int option = JOptionPane.showConfirmDialog(ClientGUI.this, "Do you want to leave?", "Exit", JOptionPane.YES_NO_OPTION);
-                if(option == JOptionPane.YES_OPTION) {
-                    myStompClient.disconnectUser(username);
-                    ClientGUI.this.dispose();
+
+                    int option = JOptionPane.showConfirmDialog(ClientGUI.this, "Do you want to leave?", "Exit", JOptionPane.YES_NO_OPTION);
+                    if (option == JOptionPane.YES_OPTION) {
+                        myStompClient.disconnectUser(username);
+                        ClientGUI.this.dispose();
+                    }
                 }
-            }
+
         });
         getContentPane().setBackground(Utilities.PRIMARY_COLOR);
         addGUIComponents();
@@ -91,9 +94,9 @@ public class ClientGUI extends JFrame {
                     String input = inputField.getText();
                     if(input.isEmpty()) return;
                     inputField.setText("");
-                    messagePanel.add(createChatMessageComponent(new Message("R",input)));
-                    repaint();
-                    revalidate();
+//                  //messagePanel.add(createChatMessageComponent(new Message("Ruslan",input)));
+//                  //repaint();
+//                   //revalidate();
                     myStompClient.sendMessage(new Message(username, input));
                 }
             }
@@ -125,5 +128,15 @@ public class ClientGUI extends JFrame {
         chatMessage.add(messageLabel);
 
         return chatMessage;
+    }
+
+    @Override
+    public void onMessageReceived(Message message) {
+        
+    }
+
+    @Override
+    public void onActiveUserUpdated(ArrayList<String> users) {
+
     }
 }
