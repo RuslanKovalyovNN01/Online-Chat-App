@@ -132,7 +132,11 @@ public class ClientGUI extends JFrame implements MessageListener{
 
     @Override
     public void onMessageReceived(Message message) {
-        System.out.println("onMessageRecieve");
+        //System.out.println("onMessageRecieve");
+        messagePanel.add(createChatMessageComponent(message));
+        revalidate();
+        repaint();
+        //revalidate();
     }
 
     @Override

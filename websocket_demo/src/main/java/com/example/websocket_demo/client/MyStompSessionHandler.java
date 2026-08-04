@@ -35,7 +35,9 @@ public class MyStompSessionHandler extends  StompSessionHandlerAdapter {
                 public void handleFrame(StompHeaders headers, Object payload) {
                     try {
                         if (payload instanceof Message) {
+
                             Message message = (Message) payload;
+                            messageListener.onMessageReceived(message);
                             System.out.println("Received message: " + message.getUser() + ": " + message.getMessage());
                         } else {
                             System.out.println("Received unexpected payload type: " + payload.getClass());
@@ -48,10 +50,22 @@ public class MyStompSessionHandler extends  StompSessionHandlerAdapter {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("After subscribing");
+        //System.out.println("After subscribing");
         System.out.println("Client Subscribe to /topic/messages");
         //session.send("/app/connect", username);
         //session.send("/app/request-users", "");
+        session.subscribe("/topic/users", new StompFrameHandler() {
+            @Override
+            public Type getPayloadType(StompHeaders headers) {
+                return null;
+            }
+
+            @Override
+            public void handleFrame(StompHeaders headers, @Nullable Object payload) {
+
+            }
+        });
+
     }
     @Override
     public void handleTransportError(StompSession session, Throwable exception) {
