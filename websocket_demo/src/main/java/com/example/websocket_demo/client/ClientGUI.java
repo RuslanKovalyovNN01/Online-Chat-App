@@ -141,6 +141,21 @@ public class ClientGUI extends JFrame implements MessageListener{
 
     @Override
     public void onActiveUserUpdated(ArrayList<String> users) {
-
+        if(connectedUsersPanel.getComponents().length >= 2){
+            connectedUsersPanel.remove(1);
+        }
+        JPanel usersListPanel = new JPanel();
+        usersListPanel.setBackground(Utilities.TRANSPARENT_COLOR);
+        usersListPanel.setLayout(new BoxLayout(usersListPanel, BoxLayout.Y_AXIS));
+        for(String user: users){
+            JLabel username = new JLabel();
+            username.setText(user);
+            username.setForeground(Utilities.TEXT_COLOR);
+            username.setFont(new Font("Inter", Font.BOLD, 16));
+            usersListPanel.add(username);
+        }
+        connectedUsersPanel.add(usersListPanel);
+        revalidate();
+        repaint();
     }
 }

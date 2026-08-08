@@ -8,6 +8,7 @@ import org.springframework.messaging.simp.stomp.StompSession;
 import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 public class MyStompSessionHandler extends  StompSessionHandlerAdapter {
 
@@ -57,15 +58,24 @@ public class MyStompSessionHandler extends  StompSessionHandlerAdapter {
         session.subscribe("/topic/users", new StompFrameHandler() {
             @Override
             public Type getPayloadType(StompHeaders headers) {
-                return null;
+                return new ArrayList<String>().getClass();
             }
 
             @Override
             public void handleFrame(StompHeaders headers, @Nullable Object payload) {
-
+                try {
+                    if(payload instanceof ArrayList){
+                        ArrayList<String> activeUsers = (ArrayList<String>) payload;
+                        messageListener.onActiveUserUpdated(activeUsers);
+                        System.out.println("Received active users " + activeUsers);
+                    }
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         });
-
+        System.out.println("Subscribed to /topic/users");
+        session.send("/app/request-users", "");
     }
     @Override
     public void handleTransportError(StompSession session, Throwable exception) {
