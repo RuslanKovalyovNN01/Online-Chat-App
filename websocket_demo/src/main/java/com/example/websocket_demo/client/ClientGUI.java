@@ -4,6 +4,8 @@ import com.example.websocket_demo.Message;
 import jdk.jshell.execution.Util;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -25,6 +27,7 @@ public class ClientGUI extends JFrame implements MessageListener{
     private JPanel connectedUsersPanel, messagePanel;
     private MyStompClient myStompClient;
     private String username;
+    private JScrollPane  messagePanelScrollPane;
     public ClientGUI(String username) throws ExecutionException, InterruptedException {
         super("User: " + username);
         this.username = username;
@@ -71,7 +74,20 @@ public class ClientGUI extends JFrame implements MessageListener{
         messagePanel = new JPanel();
         messagePanel.setLayout(new BoxLayout(messagePanel, BoxLayout.Y_AXIS));
         messagePanel.setBackground(Utilities.TRANSPARENT_COLOR);
-        chatPanel.add(messagePanel, BorderLayout.CENTER);
+
+        messagePanelScrollPane = new JScrollPane(messagePanel);
+        messagePanelScrollPane.setBackground(Utilities.TRANSPARENT_COLOR);
+        messagePanelScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        messagePanelScrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        messagePanelScrollPane.getViewport().addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                revalidate();
+                repaint();
+            }
+        });
+
+        chatPanel.add(messagePanelScrollPane, BorderLayout.CENTER);
 
         messagePanel.add(createChatMessageComponent(new Message("Ruslan", "Hello!")));
 
@@ -136,6 +152,7 @@ public class ClientGUI extends JFrame implements MessageListener{
         messagePanel.add(createChatMessageComponent(message));
         revalidate();
         repaint();
+        messagePanelScrollPane.getVerticalScrollBar().setValue(Integer.MAX_VALUE);
         //revalidate();
     }
 
